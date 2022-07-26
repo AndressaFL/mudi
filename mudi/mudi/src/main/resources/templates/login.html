@@ -1,0 +1,36 @@
+<html>
+<meta charset="UTF-8" />
+<head th:replace="~{base::head}"></head>
+
+<body>
+
+	<div th:replace="~{base::Logo}"></div>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid mb-0">
+			<h1 class="display-4">Login</h1>
+			<p class="lead">Don't miss our incredible limited-time offers.</p>
+		</div>
+
+
+		<div class="card mb-3">
+		
+			<form th:action="@{/login}" class="card-body" method="post">
+				<div class="form-group">
+					<label for="username">Login</label> 
+					<input id="username" name="username"
+						class="form-control" placeholder="username" />
+				</div>
+
+
+				<div class="form-group">
+					<label for="password">Password</label> <input id="password" name="password" type="password"
+						class="form-control" placeholder="password" />
+				</div>
+<p></p>
+				<p th:if="${loginError}" class="error">Wrong user or password</p>
+				<button type="submit" class="btn btn-primary">Sign in</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

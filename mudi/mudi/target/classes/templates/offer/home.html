@@ -1,0 +1,71 @@
+<html>
+	<head th:replace="~{base::head}"></head>
+    
+	<body onload = "onLoad()">
+	
+	<div th:replace="~{base::Logo}"></div>
+	<div class="container" id="offer">
+		<div class="jumbotron jumbotron-fluid mb-0">
+  
+    <h1 class="display-4">Make your Offer</h1>
+    <p class="lead">Don't miss our incredible limited-time offers.</p>
+ 
+</div>
+		
+		
+			<div class="card mb-3" v-for="pedido in pedidos">
+		
+				<div  class="card-header alert alert-dark"> {{pedido.nameProduct}}</div>
+				
+				
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row ">
+								<div class="col-md-5">Price: <input /></div>
+								<div class="col-md-6">Delivery Date: <input /></div>
+							</div>
+							
+							<div>Product</div> 
+							<div> <a v-bind:href="pedido.urlProduct">{{pedido.nameProduct}}</a></div>
+							
+							<div>Overview</div>
+							<div>
+								<textarea class="form-control"> {{pedido.overview}}"></textarea>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div>
+							
+								<img class="card-img-top" v-bind:src ="pedido.urlImage" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		function onLoad(){
+			
+			var app = new Vue(
+					{
+				  el: '#offer',
+				  data: {
+				    pedidos:[]
+				    	
+				  },
+				  mounted () {
+					    axios
+					      .get('http://localhost:8080/api/pedidos/waiting')
+					      .then(response => (this.pedidos = response.data))
+					  }
+				  
+				});
+			
+		}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		
+	</body>
+</html>

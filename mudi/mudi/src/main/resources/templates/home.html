@@ -1,0 +1,48 @@
+<html>
+	<head th:replace="~{base::head}"></head>
+    
+	<body>
+	
+	<div th:replace="~{base::Logo}"></div>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid mb-0">
+  
+    <h1 class="display-4">Last Orders</h1>
+    <p class="lead">Don't miss our incredible limited-time offers.</p>
+ 
+</div>
+		
+		
+			<div class="card mb-3" th:each="pedido : ${pedidos}">
+		
+				<div  class="card-header alert alert-dark" th:text="${pedido.nameProduct}">Product name</div>
+				
+				
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row ">
+								<div class="col-md-5">Price: <span th:if="${pedido.price} != null" th:text="${'$' + #numbers.formatDecimal(pedido.price,3,'POINT',2,'POINT')}"></span></div>
+								<div class="col-md-6">Delivery Date: <span th:text="${#temporals.format(pedido.deliveryDate, 'dd/MM/yyyy')}"></span></div>
+							</div>
+							
+							<div>Product</div> 
+							<div> <input class="form-control" th:value="${pedido.urlProduct}" value="url do produto" /></div>
+							
+							<div>Overview</div>
+							<div>
+								<textarea class="form-control" th:text="${pedido.overview}"></textarea>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div>
+							
+								<img class="card-img-top" th:src="${pedido.urlImage}" src="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
